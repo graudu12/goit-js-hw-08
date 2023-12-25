@@ -63,7 +63,7 @@ const images = [
     description: "Lighthouse Coast Sea",
   },
 ];
-//let instance;
+let instance;
 
 const refs = {
   gallery: document.querySelector('.gallery'),
@@ -81,7 +81,7 @@ function onGalleryClick(event) {
   const original = event.target.dataset.source;
   const description = event.target.dataset.description;
 
-  const instance = basicLightbox.create(
+  instance = basicLightbox.create(
     `<div class="modal">
         <img class="modal-img"
           src= "${original}"
@@ -89,10 +89,10 @@ function onGalleryClick(event) {
         />
      </div>`,
     {
-      onShow: () => {
-        document.addEventListener('keydown', createGallery);
+      onShow: (instance) => {
+        document.addEventListener('keydown', onModalClose);
       },
-      onClose: () => {
+      onClose: (instance) => {
         document.removeEventListener('keydown', onModalClose);
       },
     },
